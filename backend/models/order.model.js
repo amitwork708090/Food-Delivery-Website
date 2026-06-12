@@ -24,8 +24,8 @@ const shopOrderSchema = new mongoose.Schema({
     shopOrderItems: [shopOrderItemSchema],
     status:{
         type:String,
-        enum:["pending","preparing","out of delivery","delivered"],
-        default:"pending"
+        enum:["Pending","Preparing","Out of Delivery","Delivered"],
+        default:"Pending"
     },
   assignment:{
      type: mongoose.Schema.Types.ObjectId,
