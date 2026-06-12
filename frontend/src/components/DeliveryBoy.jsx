@@ -1,11 +1,11 @@
 import React from "react";
-import Nav from "./Nav";
+import Nav from "./Nav.jsx";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { serverUrl } from "../App";
 import { useEffect } from "react";
 import { useState } from "react";
-import DeliveryBoyTracking from "./DeliveryBoyTracking";
+import DeliveryBoyTracking from "./DeliveryBoyTracking.jsx";
 import { ClipLoader } from "react-spinners";
 import {
   Bar,
