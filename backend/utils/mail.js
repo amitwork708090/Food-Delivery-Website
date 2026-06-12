@@ -11,7 +11,6 @@ const transporter = nodemailer.createTransport({
   },
    connectionTimeout: 10000, // Timeout
 });
-});
 
 export const sendOtpMail = async (to, otp) => {
   await transporter.sendMail({
