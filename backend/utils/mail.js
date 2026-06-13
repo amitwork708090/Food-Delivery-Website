@@ -22,9 +22,17 @@ export const sendOtpMail = async (to, otp) => {
   }
 };
 
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.APP_PASSWORD, // ⚠️ normal password nahi
+  },
+});
+
 // Delivery OTP
 export const sendDeliveryOtpMail = async (user, otp) => {
-  await resend.sendMail({
+  await transporter.sendMail({
     from: process.env.EMAIL,
     to: user.email,
     subject: "Delivery OTP",
