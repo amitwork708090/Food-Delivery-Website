@@ -24,7 +24,7 @@ export const sendOtpMail = async (to, otp) => {
 
 // Delivery OTP
 export const sendDeliveryOtpMail = async (user, otp) => {
-  await transporter.sendMail({
+  await resend.sendMail({
     from: process.env.EMAIL,
     to: user.email,
     subject: "Delivery OTP",
