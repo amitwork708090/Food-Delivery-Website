@@ -520,7 +520,7 @@ export const verifyDeliveryOtp = async (req, res) => {
       return res.status(400).json({ message: "Invalid/Expired Otp" });
     }
 
-    shopOrder.status = "delivered";
+    shopOrder.status = "Delivered";
     shopOrder.deliveredAt = Date.now();
     await order.save();
     await DeliveryAssignment.deleteOne({
@@ -545,7 +545,7 @@ export const getTodayDeliveries = async (req, res) => {
 
     const orders = await Order.find({
       "shopOrders.assignedDeliveryBoy": deliveryBoyId,
-      "shopOrders.status": "delivered",
+      "shopOrders.status": "Delivered",
       "shopOrders.deliveredAt": { $gte: startsOfDay },
     }).lean();
 
@@ -555,7 +555,7 @@ export const getTodayDeliveries = async (req, res) => {
       order.shopOrders.forEach((shopOrder) => {
         if (
           shopOrder.assignedDeliveryBoy == deliveryBoyId &&
-          shopOrder.status == "delivered" &&
+          shopOrder.status == "Delivered" &&
           shopOrder.deliveredAt &&
           shopOrder.deliveredAt >= startsOfDay
         ) {
