@@ -1,53 +1,36 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASS, // App Password hona chahiye
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-// 🔥 verify connection (important for debugging)
-transporter.verify(function (error, success) {
-  if (error) {
-    console.log("SMTP ERROR:", error);
-  } else {
-    console.log("SMTP READY");
-  }
-});
-
-// ✅ Common mail sender function
-const sendMail = async (options) => {
+// OTP mail
+export const sendOtpMail = async (to, otp) => {
   try {
-    const info = await transporter.sendMail(options);
-    console.log("Email sent:", info.response);
-    return true;
+    await resend.emails.send({
+      from: "onboarding@resend.dev",
+      to,
+      subject: "Reset Your Password",
+      html: `<p>Your OTP is <b>${otp}</b></p>`,
+    });
   } catch (error) {
-    console.log("Mail Error:", error);
+    console.log("Resend Error:", error);
     throw new Error("Email not sent");
   }
 };
 
-// ✅ OTP mail
-export const sendOtpMail = async (to, otp) => {
-  return await sendMail({
-    from: `"Food App" <${process.env.EMAIL}>`,
-    to,
-    subject: "Reset Your Password",
-    html: `<p>Your OTP is <b>${otp}</b> (valid 5 min)</p>`,
-  });
-};
-
-// ✅ Delivery OTP
+// Delivery OTP
 export const sendDeliveryOtpMail = async (user, otp) => {
-  return await sendMail({
-    from: `"Food App" <${process.env.EMAIL}>`,
-    to: user.email,
-    subject: "Delivery OTP",
-    html: `<p>Your Delivery OTP is <b>${otp}</b></p>`,
-  });
+  try {
+    await resend.emails.send({
+      from: "onboarding@resend.dev",
+      to: user.email,
+      subject: "Delivery OTP",
+      html: `<p>Your Delivery OTP is <b>${otp}</b></p>`,
+    });
+  } catch (error) {
+    console.log("Resend Error:", error);
+    throw new Error("Email not sent");
+  }
 };
