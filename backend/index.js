@@ -13,6 +13,9 @@ import http from "http";
 import { Server } from "socket.io";
 import { socketHandler } from "./socket.js";
 
+import dns from "node:dns";
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
 dotenv.config();
 
 const app = express();
@@ -42,6 +45,10 @@ app.use("/api/user", userRouter);
 app.use("/api/shop", shopRouter);
 app.use("/api/item", itemRouter);
 app.use("/api/order", orderRouter);
+
+app.get("/", (req, res) => {
+  res.send("Backend is running");
+});
 
 socketHandler(io);
 server.listen(port, () => {
