@@ -23,7 +23,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://fooddeliverywebsite-6hls.onrender.com",
+    origin: "https://food-delivery-website-gu26.vercel.app",
     credentials: true,
     methods: ["POST", "GET"],
   },
@@ -34,7 +34,7 @@ app.set("io", io);
 const port = process.env.PORT || 5000;
 app.use(
   cors({
-    origin: "https://fooddeliverywebsite-6hls.onrender.com",
+    origin: "https://food-delivery-website-gu26.vercel.app",
     credentials: true,
   }),
 );
