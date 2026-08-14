@@ -25,7 +25,7 @@ import { useEffect } from "react";
 import { io } from "socket.io-client";
 import { setSocket } from "./redux/userSlice";
 
-export const serverUrl = "https://food-delivery-website-beryl-beta.vercel.app";
+export const serverUrl = "https://food-delivery-website-six-psi.vercel.app";
 function App() {
   const { userData } = useSelector((state) => state.user);
   const dispatch = useDispatch();
