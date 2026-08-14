@@ -3,9 +3,8 @@ import dotenv from "dotenv";
 import connectDb from "./config/db.js";
 import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.routes.js";
-import cors from "cors";
 import userRouter from "./routes/user.routes.js";
-
+import cors from "cors";
 import itemRouter from "./routes/item.routes.js";
 import shopRouter from "./routes/shop.routes.js";
 import orderRouter from "./routes/order.routes.js";
