@@ -50,7 +50,22 @@ app.get("/", (req, res) => {
 });
 
 socketHandler(io);
-server.listen(port, () => {
-  connectDb();
-  console.log(`server started at ${port}`);
-});
+
+// server.listen(port, () => {
+//   connectDb();
+//   console.log(`server started at ${port}`);
+// });
+
+const startServer = async () => {
+  try {
+    await connectDb();
+    console.log("db connected");
+
+    server.listen(port, "0.0.0.0", () => {
+      console.log(`server started at ${port}`);
+    });
+  } catch (error) {
+    console.error("Database connection failed:", error);
+    process.exit(1);
+  }
+};
