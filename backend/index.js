@@ -56,16 +56,25 @@ socketHandler(io);
 //   console.log(`server started at ${port}`);
 // });
 
+
+console.log("1. Starting server...");
+console.log("2. PORT =", port);
+
 const startServer = async () => {
   try {
+    console.log("3. Connecting to database...");
+
     await connectDb();
-    console.log("db connected");
+
+    console.log("4. Database connected!");
 
     server.listen(port, "0.0.0.0", () => {
-      console.log(`server started at ${port}`);
+      console.log(`5. Server started at ${port}`);
     });
   } catch (error) {
-    console.error("Database connection failed:", error);
+    console.error("DATABASE ERROR:", error);
     process.exit(1);
   }
 };
+
+startServer();
