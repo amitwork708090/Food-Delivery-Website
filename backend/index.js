@@ -22,7 +22,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://food-delivery-website-production-6d61.up.railway.app",
+    origin: "http://localhost:5173",
     credentials: true,
     methods: ["POST", "GET"],
   },
@@ -33,7 +33,7 @@ app.set("io", io);
 const port = process.env.PORT || 5000;
 app.use(
   cors({
-    origin: "https://food-delivery-website-production-6d61.up.railway.app",
+    origin: "http://localhost:5173",
     credentials: true,
   }),
 );
@@ -51,30 +51,7 @@ app.get("/", (req, res) => {
 
 socketHandler(io);
 
-// server.listen(port, () => {
-//   connectDb();
-//   console.log(`server started at ${port}`);
-// });
-
-
-console.log("1. Starting server...");
-console.log("2. PORT =", port);
-
-const startServer = async () => {
-  try {
-    console.log("3. Connecting to database...");
-
-    await connectDb();
-
-    console.log("4. Database connected!");
-
-    server.listen(port, "0.0.0.0", () => {
-      console.log(`5. Server started at ${port}`);
-    });
-  } catch (error) {
-    console.error("DATABASE ERROR:", error);
-    process.exit(1);
-  }
-};
-
-startServer();
+server.listen(port, () => {
+  connectDb();
+  console.log(`server started at ${port}`);
+});
