@@ -15,7 +15,10 @@ import { Server } from "socket.io"
 import { socketHandler } from "./socket.js"
 
 const app=express()
-const server=http.createServer(app)
+const server=http.createServer(app);
+
+import dns from "node:dns";
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 const io=new Server(server,{
    cors:{
