@@ -49,11 +49,13 @@ app.get("/", (req, res) => {
   res.send("Backend is running!")
 });
 
+connectDb();
+
 socketHandler(io);
 
 server.listen(port, () => {
-  connectDb();
   console.log(`server started at ${port}`);
 });
+
 
 export default app;
