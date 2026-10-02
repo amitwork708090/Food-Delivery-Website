@@ -2,6 +2,7 @@ import User from "../models/user.model.js"
 import bcrypt, { hash } from "bcryptjs"
 import genToken from "../utils/token.js"
 import { sendOtpMail } from "../utils/mail.js"
+
 export const signUp=async (req,res) => {
     try {
         const {fullName,email,password,mobile,role}=req.body
@@ -27,8 +28,8 @@ export const signUp=async (req,res) => {
 
         const token=await genToken(user._id)
         res.cookie("token",token,{
-            secure:false,
-            sameSite:"strict",
+            secure:true,
+            sameSite:"none",
             maxAge:7*24*60*60*1000,
             httpOnly:true
         })
@@ -55,8 +56,8 @@ export const signIn=async (req,res) => {
 
         const token=await genToken(user._id)
         res.cookie("token",token,{
-            secure:false,
-            sameSite:"strict",
+            secure:true,
+            sameSite:"none",
             maxAge:7*24*60*60*1000,
             httpOnly:true
         })
@@ -142,8 +143,8 @@ export const googleAuth=async (req,res) => {
 
         const token=await genToken(user._id)
         res.cookie("token",token,{
-            secure:false,
-            sameSite:"strict",
+            secure:true, // false
+            sameSite:"none", // strict
             maxAge:7*24*60*60*1000,
             httpOnly:true
         })
