@@ -22,7 +22,7 @@ dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://food-delivery-website-ashy-beta.vercel.app",
     credentials: true,
     methods: ["POST", "GET"],
   },
@@ -33,7 +33,7 @@ app.set("io", io);
 const port = process.env.PORT || 5000;
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://food-delivery-website-ashy-beta.vercel.app",
     credentials: true,
   }),
 );
