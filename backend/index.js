@@ -45,7 +45,12 @@ app.use("/api/shop", shopRouter);
 app.use("/api/item", itemRouter);
 app.use("/api/order", orderRouter);
 
+app.get("/", (req, res) => {
+  res.send("Backend is running!")
+});
+
 socketHandler(io);
+
 server.listen(port, () => {
   connectDb();
   console.log(`server started at ${port}`);
